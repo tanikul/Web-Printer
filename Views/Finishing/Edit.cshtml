@@ -1,0 +1,93 @@
+﻿@model WebPrinter.Models.Finishing
+
+@using (Ajax.BeginForm("Edit", "Finishing", new AjaxOptions { HttpMethod = "POST", OnSuccess = "Finish.editSuccess();" }, new { @class = "form-horizontal", @role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.topic, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.topic, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.topic, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.detail, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.detail, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.detail, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.type_id, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(m => m.type_id, Model.GetTypeFinishing, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.type_id, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.unit_id, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(m => m.unit_id, Model.GetUnitFinishing, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.unit_id, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.quantity1, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.quantity1, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.quantity1, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.price1, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.price1, new {  @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.price1, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.quantity2, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.quantity2, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.quantity2, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.price2, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.price2, new { @class = "form-control"})
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.price2, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.quantity3, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.quantity3, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.quantity3, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.price3, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.price3, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.price3, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.id)
+                <div class="form-group">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+<script type="text/javascript" charset="utf-8">
+    $.validator.unobtrusive.parse($("form"));
+</script>
+

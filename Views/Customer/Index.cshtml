@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">จัดการข้อมูลลูกค้า</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="add-data-bnt"><button type="button" class="btn btn-primary" id="add_data" onclick="Customer.Register();"><i class="glyphicon glyphicon-plus"></i>  เพิ่มข้อมูล</button></div>
+        </div>
+
+        <table id="example" class="table-bordered" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>ลำดับ</th>
+                    <th>ชื่อ - นามสกุล</th>
+                    <th>บริษัท</th>
+                    <th>เบอร์โทรศัพท์</th>
+                    <th>เบอร์โทรศัพท์มือถือ</th>
+                    <th>แฟกซ์</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    function format(d) {
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+            '<tr>' +
+                '<td align="right" width="30%">ที่อยู่ :</td>' +
+                '<td width="70%">' + d.address + '</td>' +
+            '</tr>' +
+            '<tr>' +
+                '<td align="right" width="30%">จังหวัด :</td>' +
+                '<td width="70%">' + d.province + '</td>' +
+            '</tr>' +
+            '<tr>' +
+                '<td align="right" width="30%">รหัสไปรษณีย์ :</td>' +
+                '<td width="70%">' + d.postcode + '</td>' +
+            '</tr>' +
+            '<tr>' +
+                '<td align="right" width="30%">แก้ไข/ลบ :</td>' +
+                '<td width="70%">' + d.edit + '</td>' +
+            '</tr>' +
+        '</table>';
+    }
+
+    $(document).ready(function () {
+        table = $('#example').DataTable({
+            ajax: {
+                url: '/Customer/LoadCustomer',
+                type: 'POST',
+            },
+            "columns": [
+                {
+                    "className": 'details-control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+                { "data": "id" },
+                { "data": "name" },
+                { "data": "company" },
+                { "data": "phone" },
+                { "data": "mobile" },
+                { "data": "fax" },
+                { "data": "email" },
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        $('#example tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+        });
+    });
+</script>
+
+
+
+
+

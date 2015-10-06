@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4a6edd1234d543aa8a86a76c254db005" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="PrinterStockModel.ColorUnit" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrinterStockModel.Customer" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrinterStockModel.Finishing" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrinterStockModel.Machine_Printer" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrinterStockModel.Owner" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrinterStockModel.Stock_Paper" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrinterStockModel.Sys_Print" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrinterStockModel.Type_Finishing" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrinterStockModel.Unit" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrinterStockModel.Job_Type" Width="1.5" PointX="7.375" PointY="8.75" />
+        <EntityTypeShape EntityType="PrinterStockModel.Transfer" Width="1.5" PointX="9.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PrinterStockModel.Province" Width="1.5" PointX="9.375" PointY="9.75" />
+        <EntityTypeShape EntityType="PrinterStockModel.DetailDataPrinter" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PrinterStockModel.HeadDataPrinter" Width="1.5" PointX="0.75" PointY="11.75" />
+        <AssociationConnector Association="PrinterStockModel.DetailDataPrinter_to_HeadDetailDataPrinter" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

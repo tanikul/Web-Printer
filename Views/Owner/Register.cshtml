@@ -1,0 +1,63 @@
+﻿@model WebPrinter.Models.CreateUserModel
+
+@using (Ajax.BeginForm("Register", "Owner", new AjaxOptions { HttpMethod = "POST", OnSuccess = "Owner.registerSuccess();" }, new { @class = "form-horizontal", @role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.firstname, new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.firstname, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.firstname, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.lastname, new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.lastname, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.lastname, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.username, new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.username, "", new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.username, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.password, new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-9">
+                        @Html.PasswordFor(m => m.password, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.password, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.email, new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.email, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.roles, new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(m => m.roles, Model.dp, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.roles, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+<script type="text/javascript" charset="utf-8">
+    $.validator.unobtrusive.parse($("form"));
+</script>

@@ -1,0 +1,167 @@
+﻿@model WebPrinter.Models.Machine_Printer
+
+@using (Ajax.BeginForm("Edit", "Printer", new AjaxOptions { HttpMethod = "POST", OnSuccess = "Printer.editSuccess();" }, new { @class = "form-horizontal", @role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.id, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-4">
+                        @Html.EditorFor(m => m.id, new { htmlAttributes = new { @placeholder = "ชื่อ", @class = "form-control", disabled = "disabled" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.id, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.name_printer, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(m => m.name_printer, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.name_printer, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.system_id, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.DropDownListFor(m => m.system_id, WebPrinter.Models.Sys_Print.GetTypeSys, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.system_id, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.colorunit_id, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(m => m.colorunit_id, WebPrinter.Models.ColorUnit.GetColor, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.colorunit_id, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">ขนาดกระดาษสูงสุด(mm.)</label>
+                    @Html.LabelFor(m => m.paper_width, new { @class = "col-sm-1 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.paper_width, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.paper_width, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                    @Html.LabelFor(m => m.paper_length, new { @class = "col-sm-1 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.paper_length, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.paper_length, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.graeme_print, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.graeme_print, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.graeme_print, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">ระยะขอบขาวของกระดาษ</label>
+                    @Html.LabelFor(m => m.paper_left, new { @class = "col-sm-1 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.paper_left, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.paper_left, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                    @Html.LabelFor(m => m.paper_right, new { @class = "col-sm-1 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.paper_right, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.paper_right, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    @Html.LabelFor(m => m.paper_top, new { @class = "col-sm-1 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.paper_top, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.paper_top, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                    @Html.LabelFor(m => m.paper_under, new { @class = "col-sm-1 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.paper_under, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.paper_under, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.autoduplex_gsm, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.autoduplex_gsm, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.autoduplex_gsm, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.printingspeed_color, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.printingspeed_color, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.printingspeed_color, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.printingspeed_blackwhite, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.printingspeed_blackwhite, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.printingspeed_blackwhite, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.colormeter_price, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.colormeter_price, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.colormeter_price, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.blackwhitemeter_price, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.blackwhitemeter_price, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.blackwhitemeter_price, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.setprintpang1, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.setprintpang1, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.setprintpang1, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.setprintpang2, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.setprintpang2, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.setprintpang2, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.printercostprict, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.printercostprict, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.printercostprict, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.@operator, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.@operator, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.@operator, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.workinghours, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-3">
+                        @Html.EditorFor(m => m.workinghours, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.workinghours, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.id, new { Name = "id" })
+                <div class="form-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+<script type="text/javascript" charset="utf-8">
+    $.validator.unobtrusive.parse($("form"));
+</script>

@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PrinterStockModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ColorUnit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="colorunit1" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="company" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="fname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="lname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DetailDataPrinter">
+    <Key>
+      <PropertyRef Name="idheaddataprinter" />
+    </Key>
+    <Property Name="idheaddataprinter" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idtopic" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="idname_printer" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="idtype_paper" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="unitid" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="createrdate" Type="DateTime" Precision="6" />
+    <Property Name="changeddate" Type="DateTime" Precision="6" />
+    <Property Name="quantity" Type="Double" />
+    <Property Name="vat" Type="Double" />
+    <Property Name="discount" Type="Double" />
+    <Property Name="price" Type="Double" />
+    <Property Name="totalprice" Type="Double" />
+    <Property Name="greandtotalprice" Type="Double" />
+    <Property Name="ownerid" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="changedbyid" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="id_job_type" Type="Int32" />
+    <Property Name="id_transfer" Type="Int32" />
+    <Property Name="date_recieve" Type="Time" Precision="6" />
+  </EntityType>
+  <EntityType Name="Finishing">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="topic" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="detail" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="type_id" Type="Int32" />
+    <Property Name="unit_id" Type="Int32" />
+    <Property Name="quantity1" Type="Int32" />
+    <Property Name="price1" Type="Double" />
+    <Property Name="quantity2" Type="Int32" />
+    <Property Name="price2" Type="Double" />
+    <Property Name="quantity3" Type="Int32" />
+    <Property Name="price3" Type="Double" />
+  </EntityType>
+  <EntityType Name="HeadDataPrinter">
+    <Key>
+      <PropertyRef Name="idheaddataprinter" />
+    </Key>
+    <Property Name="idheaddataprinter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_customer" Type="Int32" />
+    <Property Name="createrdate" Type="DateTime" Precision="6" />
+    <Property Name="changeddate" Type="DateTime" Precision="6" />
+    <Property Name="totalquantity" Type="Double" />
+    <Property Name="totalvat" Type="Double" />
+    <Property Name="totaldiscount" Type="Double" />
+    <Property Name="totalprice" Type="Double" />
+    <Property Name="greandtotalprice" Type="Double" />
+    <Property Name="ownerid" Type="Int32" />
+    <Property Name="changedbyid" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Machine_Printer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="name_printer" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="system_id" Type="Int32" />
+    <Property Name="colorunit_id" Type="Int32" />
+    <Property Name="paper_width" Type="Double" />
+    <Property Name="paper_length" Type="Double" />
+    <Property Name="graeme_print" Type="Double" Nullable="false" />
+    <Property Name="paper_left" Type="Double" />
+    <Property Name="paper_right" Type="Double" />
+    <Property Name="paper_top" Type="Double" />
+    <Property Name="paper_under" Type="Double" />
+    <Property Name="autoduplex_gsm" Type="Double" />
+    <Property Name="printingspeed_color" Type="Double" />
+    <Property Name="printingspeed_blackwhite" Type="Double" />
+    <Property Name="colormeter_price" Type="Double" />
+    <Property Name="blackwhitemeter_price" Type="Double" />
+    <Property Name="setprintpang1" Type="Double" />
+    <Property Name="setprintpang2" Type="Double" />
+    <Property Name="printercostprict" Type="Double" />
+    <Property Name="installment" Type="Double" />
+    <Property Name="operator" Type="Double" />
+    <Property Name="workinghours" Type="Double" />
+  </EntityType>
+  <EntityType Name="Owner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="firstname" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="lastname" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="createrdate" Type="DateTime" Precision="6" />
+    <Property Name="username" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="roles" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Stock_Paper">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="type_paper" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="gsm" Type="Int32" />
+    <Property Name="width" Type="Double" />
+    <Property Name="length" Type="Double" />
+    <Property Name="sheets_per_pack" Type="Double" />
+    <Property Name="price_per_pack" Type="Double" />
+    <Property Name="price_per_sheet" Type="Double" />
+  </EntityType>
+  <EntityType Name="Sys_Print">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="systemname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Type_Finishing">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type_finishing1" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="unit1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="PrinterStockEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ColorUnits" EntityType="Self.ColorUnit" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="DetailDataPrinters" EntityType="Self.DetailDataPrinter" />
+    <EntitySet Name="Finishings" EntityType="Self.Finishing" />
+    <EntitySet Name="HeadDataPrinters" EntityType="Self.HeadDataPrinter" />
+    <EntitySet Name="Machine_Printer" EntityType="Self.Machine_Printer" />
+    <EntitySet Name="Owners" EntityType="Self.Owner" />
+    <EntitySet Name="Stock_Paper" EntityType="Self.Stock_Paper" />
+    <EntitySet Name="Sys_Print" EntityType="Self.Sys_Print" />
+    <EntitySet Name="Type_Finishing" EntityType="Self.Type_Finishing" />
+    <EntitySet Name="Units" EntityType="Self.Unit" />
+    <EntitySet Name="Job_Type" EntityType="PrinterStockModel.Job_Type" />
+    <EntitySet Name="Transfers" EntityType="PrinterStockModel.Transfer" />
+  </EntityContainer>
+  <EntityType Name="Job_Type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_job_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Transfer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_transfer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

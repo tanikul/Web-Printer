@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PrinterStockModelStoreContainer" CdmEntityContainer="PrinterStockEntities">
+    <EntitySetMapping Name="ColorUnits">
+      <EntityTypeMapping TypeName="PrinterStockModel.ColorUnit">
+        <MappingFragment StoreEntitySet="ColorUnit">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="colorunit" ColumnName="colorunit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="PrinterStockModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="fax" ColumnName="fax" />
+          <ScalarProperty Name="postcode" ColumnName="postcode" />
+          <ScalarProperty Name="id_province" ColumnName="id_province" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="lname" ColumnName="lname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Finishings">
+      <EntityTypeMapping TypeName="PrinterStockModel.Finishing">
+        <MappingFragment StoreEntitySet="Finishing">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="topic" ColumnName="topic" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="type_id" ColumnName="type_id" />
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+          <ScalarProperty Name="quantity1" ColumnName="quantity1" />
+          <ScalarProperty Name="price1" ColumnName="price1" />
+          <ScalarProperty Name="quantity2" ColumnName="quantity2" />
+          <ScalarProperty Name="price2" ColumnName="price2" />
+          <ScalarProperty Name="quantity3" ColumnName="quantity3" />
+          <ScalarProperty Name="price3" ColumnName="price3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Machine_Printer">
+      <EntityTypeMapping TypeName="PrinterStockModel.Machine_Printer">
+        <MappingFragment StoreEntitySet="Machine_Printer">
+          <ScalarProperty Name="electricity" ColumnName="electricity" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name_printer" ColumnName="name_printer" />
+          <ScalarProperty Name="system_id" ColumnName="system_id" />
+          <ScalarProperty Name="colorunit_id" ColumnName="colorunit_id" />
+          <ScalarProperty Name="paper_width" ColumnName="paper_width" />
+          <ScalarProperty Name="paper_length" ColumnName="paper_length" />
+          <ScalarProperty Name="graeme_print" ColumnName="graeme_print" />
+          <ScalarProperty Name="paper_left" ColumnName="paper_left" />
+          <ScalarProperty Name="paper_right" ColumnName="paper_right" />
+          <ScalarProperty Name="paper_top" ColumnName="paper_top" />
+          <ScalarProperty Name="paper_under" ColumnName="paper_under" />
+          <ScalarProperty Name="autoduplex_gsm" ColumnName="autoduplex_gsm" />
+          <ScalarProperty Name="printingspeed_color" ColumnName="printingspeed_color" />
+          <ScalarProperty Name="printingspeed_blackwhite" ColumnName="printingspeed_blackwhite" />
+          <ScalarProperty Name="colormeter_price" ColumnName="colormeter_price" />
+          <ScalarProperty Name="blackwhitemeter_price" ColumnName="blackwhitemeter_price" />
+          <ScalarProperty Name="setprintpang1" ColumnName="setprintpang1" />
+          <ScalarProperty Name="setprintpang2" ColumnName="setprintpang2" />
+          <ScalarProperty Name="printercostprict" ColumnName="printercostprict" />
+          <ScalarProperty Name="installment" ColumnName="installment" />
+          <ScalarProperty Name="operator" ColumnName="operator" />
+          <ScalarProperty Name="workinghours" ColumnName="workinghours" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Owners">
+      <EntityTypeMapping TypeName="PrinterStockModel.Owner">
+        <MappingFragment StoreEntitySet="Owner">
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="createrdate" ColumnName="createrdate" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="roles" ColumnName="roles" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stock_Paper">
+      <EntityTypeMapping TypeName="PrinterStockModel.Stock_Paper">
+        <MappingFragment StoreEntitySet="Stock_Paper">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="type_paper" ColumnName="type_paper" />
+          <ScalarProperty Name="gsm" ColumnName="gsm" />
+          <ScalarProperty Name="width" ColumnName="width" />
+          <ScalarProperty Name="length" ColumnName="length" />
+          <ScalarProperty Name="sheets_per_pack" ColumnName="sheets_per_pack" />
+          <ScalarProperty Name="price_per_pack" ColumnName="price_per_pack" />
+          <ScalarProperty Name="price_per_sheet" ColumnName="price_per_sheet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Print">
+      <EntityTypeMapping TypeName="PrinterStockModel.Sys_Print">
+        <MappingFragment StoreEntitySet="Sys_Print">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="systemname" ColumnName="systemname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Type_Finishing">
+      <EntityTypeMapping TypeName="PrinterStockModel.Type_Finishing">
+        <MappingFragment StoreEntitySet="Type_Finishing">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="type_finishing" ColumnName="type_finishing" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Units">
+      <EntityTypeMapping TypeName="PrinterStockModel.Unit">
+        <MappingFragment StoreEntitySet="Unit">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Job_Type">
+      <EntityTypeMapping TypeName="PrinterStockModel.Job_Type">
+        <MappingFragment StoreEntitySet="Job_Type">
+          <ScalarProperty Name="name_job_type" ColumnName="name_job_type" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transfers">
+      <EntityTypeMapping TypeName="PrinterStockModel.Transfer">
+        <MappingFragment StoreEntitySet="Transfer">
+          <ScalarProperty Name="name_transfer" ColumnName="name_transfer" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Provinces">
+      <EntityTypeMapping TypeName="PrinterStockModel.Province">
+        <MappingFragment StoreEntitySet="Province">
+          <ScalarProperty Name="province_name_eng" ColumnName="province_name_eng" />
+          <ScalarProperty Name="province_name" ColumnName="province_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetailDataPrinters">
+      <EntityTypeMapping TypeName="PrinterStockModel.DetailDataPrinter">
+        <MappingFragment StoreEntitySet="DetailDataPrinter">
+          <ScalarProperty Name="recieve_date" ColumnName="recieve_date" />
+          <ScalarProperty Name="profit" ColumnName="profit" />
+          <ScalarProperty Name="finishing_cost" ColumnName="finishing_cost" />
+          <ScalarProperty Name="printer_cost" ColumnName="printer_cost" />
+          <ScalarProperty Name="paper_cost" ColumnName="paper_cost" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="vat" ColumnName="vat" />
+          <ScalarProperty Name="height" ColumnName="height" />
+          <ScalarProperty Name="width" ColumnName="width" />
+          <ScalarProperty Name="black_print" ColumnName="black_print" />
+          <ScalarProperty Name="color_print" ColumnName="color_print" />
+          <ScalarProperty Name="lose" ColumnName="lose" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="id_transfer" ColumnName="id_transfer" />
+          <ScalarProperty Name="id_job_type" ColumnName="id_job_type" />
+          <ScalarProperty Name="id_finishing" ColumnName="id_finishing" />
+          <ScalarProperty Name="id_paper" ColumnName="id_paper" />
+          <ScalarProperty Name="id_printer" ColumnName="id_printer" />
+          <ScalarProperty Name="id_headdataprinter" ColumnName="id_headdataprinter" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HeadDataPrinters">
+      <EntityTypeMapping TypeName="PrinterStockModel.HeadDataPrinter">
+        <MappingFragment StoreEntitySet="HeadDataPrinter">
+          <ScalarProperty Name="changedate" ColumnName="changedate" />
+          <ScalarProperty Name="createdate" ColumnName="createdate" />
+          <ScalarProperty Name="changedbyid" ColumnName="changedbyid" />
+          <ScalarProperty Name="grandtotalprice" ColumnName="grandtotalprice" />
+          <ScalarProperty Name="totalprice" ColumnName="totalprice" />
+          <ScalarProperty Name="totaldiscount" ColumnName="totaldiscount" />
+          <ScalarProperty Name="totalvat" ColumnName="totalvat" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="id_owner" ColumnName="id_owner" />
+          <ScalarProperty Name="id_customer" ColumnName="id_customer" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

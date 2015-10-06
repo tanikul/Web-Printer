@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PrinterStockModel.Store" Provider="Npgsql" ProviderManifestToken="9.3.4" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ColorUnit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="colorunit" Type="varchar" MaxLength="8000" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company" Type="varchar" MaxLength="100" />
+          <Property Name="fname" Type="varchar" MaxLength="100" />
+          <Property Name="lname" Type="varchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="address" Type="text" />
+          <Property Name="id_province" Type="int4" />
+          <Property Name="postcode" Type="int2" />
+          <Property Name="mobile" Type="varchar" MaxLength="10" />
+          <Property Name="fax" Type="varchar" MaxLength="12" />
+          <Property Name="phone" Type="varchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="DetailDataPrinter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_headdataprinter" Type="int4" Nullable="false" />
+          <Property Name="id_printer" Type="varchar" MaxLength="5" />
+          <Property Name="id_paper" Type="varchar" MaxLength="5" />
+          <Property Name="id_finishing" Type="varchar" MaxLength="8000" />
+          <Property Name="id_job_type" Type="int4" />
+          <Property Name="id_transfer" Type="int4" />
+          <Property Name="quantity" Type="int4" />
+          <Property Name="lose" Type="int4" />
+          <Property Name="color_print" Type="int4" />
+          <Property Name="black_print" Type="int4" />
+          <Property Name="width" Type="float8" />
+          <Property Name="height" Type="float8" />
+          <Property Name="vat" Type="float8" />
+          <Property Name="discount" Type="float8" />
+          <Property Name="paper_cost" Type="float8" />
+          <Property Name="printer_cost" Type="float8" />
+          <Property Name="finishing_cost" Type="float8" />
+          <Property Name="profit" Type="float8" />
+          <Property Name="recieve_date" Type="date" />
+        </EntityType>
+        <EntityType Name="Finishing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="topic" Type="varchar" MaxLength="8000" />
+          <Property Name="detail" Type="varchar" MaxLength="8000" />
+          <Property Name="type_id" Type="int4" />
+          <Property Name="unit_id" Type="int4" />
+          <Property Name="quantity1" Type="int4" />
+          <Property Name="price1" Type="float8" />
+          <Property Name="quantity2" Type="int4" />
+          <Property Name="price2" Type="float8" />
+          <Property Name="quantity3" Type="int4" />
+          <Property Name="price3" Type="float8" />
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HeadDataPrinter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_customer" Type="int4" />
+          <Property Name="id_owner" Type="int4" />
+          <Property Name="quantity" Type="float8" />
+          <Property Name="totalvat" Type="float8" />
+          <Property Name="totaldiscount" Type="float8" />
+          <Property Name="totalprice" Type="float8" />
+          <Property Name="grandtotalprice" Type="float8" />
+          <Property Name="changedbyid" Type="int4" />
+          <Property Name="createdate" Type="timestamp" />
+          <Property Name="changedate" Type="timestamp" />
+        </EntityType>
+        <EntityType Name="Job_Type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_job_type" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Machine_Printer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="name_printer" Type="varchar" MaxLength="8000" />
+          <Property Name="system_id" Type="int4" />
+          <Property Name="colorunit_id" Type="int4" />
+          <Property Name="paper_width" Type="float8" />
+          <Property Name="paper_length" Type="float8" />
+          <Property Name="graeme_print" Type="float8" Nullable="false" />
+          <Property Name="paper_left" Type="float8" />
+          <Property Name="paper_right" Type="float8" />
+          <Property Name="paper_top" Type="float8" />
+          <Property Name="paper_under" Type="float8" />
+          <Property Name="autoduplex_gsm" Type="float8" />
+          <Property Name="printingspeed_color" Type="float8" />
+          <Property Name="printingspeed_blackwhite" Type="float8" />
+          <Property Name="colormeter_price" Type="float8" />
+          <Property Name="blackwhitemeter_price" Type="float8" />
+          <Property Name="setprintpang1" Type="float8" />
+          <Property Name="setprintpang2" Type="float8" />
+          <Property Name="printercostprict" Type="float8" />
+          <Property Name="installment" Type="float8" />
+          <Property Name="operator" Type="float8" />
+          <Property Name="workinghours" Type="float8" />
+          <Property Name="electricity" Type="float8" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="8000" />
+          <Property Name="lastname" Type="varchar" MaxLength="8000" />
+          <Property Name="createrdate" Type="timestamp" />
+          <Property Name="username" Type="varchar" MaxLength="8" />
+          <Property Name="password" Type="varchar" MaxLength="10" />
+          <Property Name="roles" Type="varchar" MaxLength="8000" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="province_name" Type="varchar" MaxLength="100" />
+          <Property Name="province_name_eng" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Stock_Paper">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="type_paper" Type="varchar" MaxLength="8000" />
+          <Property Name="gsm" Type="int4" />
+          <Property Name="width" Type="float8" />
+          <Property Name="length" Type="float8" />
+          <Property Name="sheets_per_pack" Type="float8" />
+          <Property Name="price_per_pack" Type="float8" />
+          <Property Name="price_per_sheet" Type="float8" />
+        </EntityType>
+        <EntityType Name="Sys_Print">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" Nullable="false" />
+          <Property Name="systemname" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Transfer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_transfer" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Type_Finishing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type_finishing" Type="varchar" MaxLength="8000" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="unit" Type="bpchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="DetailDataPrinter_to_HeadDetailDataPrinter">
+          <End Role="HeadDataPrinter" Type="Self.HeadDataPrinter" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetailDataPrinter" Type="Self.DetailDataPrinter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HeadDataPrinter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DetailDataPrinter">
+              <PropertyRef Name="id_headdataprinter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PrinterStockModelStoreContainer">
+          <EntitySet Name="ColorUnit" EntityType="Self.ColorUnit" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="public" store:Type="Tables" />
+          <EntitySet Name="DetailDataPrinter" EntityType="Self.DetailDataPrinter" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Finishing" EntityType="Self.Finishing" Schema="public" store:Type="Tables" />
+          <EntitySet Name="HeadDataPrinter" EntityType="Self.HeadDataPrinter" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Job_Type" EntityType="Self.Job_Type" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Machine_Printer" EntityType="Self.Machine_Printer" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Owner" EntityType="Self.Owner" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Province" EntityType="Self.Province" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Stock_Paper" EntityType="Self.Stock_Paper" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Sys_Print" EntityType="Self.Sys_Print" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Transfer" EntityType="Self.Transfer" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Type_Finishing" EntityType="Self.Type_Finishing" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Unit" EntityType="Self.Unit" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="DetailDataPrinter_to_HeadDetailDataPrinter" Association="Self.DetailDataPrinter_to_HeadDetailDataPrinter">
+            <End Role="HeadDataPrinter" EntitySet="HeadDataPrinter" />
+            <End Role="DetailDataPrinter" EntitySet="DetailDataPrinter" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PrinterStockModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ColorUnit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="colorunit" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="company" Type="String" />
+          <Property Name="fname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="mobile" Type="String" />
+          <Property Name="phone" Type="String" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_province" Type="Int32" />
+          <Property Name="postcode" Type="Int16" />
+          <Property Name="fax" Type="String" />
+        </EntityType>
+        <EntityType Name="Finishing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="topic" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="detail" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="type_id" Type="Int32" />
+          <Property Name="unit_id" Type="Int32" />
+          <Property Name="quantity1" Type="Int32" />
+          <Property Name="price1" Type="Double" />
+          <Property Name="quantity2" Type="Int32" />
+          <Property Name="price2" Type="Double" />
+          <Property Name="quantity3" Type="Int32" />
+          <Property Name="price3" Type="Double" />
+        </EntityType>
+        <EntityType Name="Machine_Printer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name_printer" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="system_id" Type="Int32" />
+          <Property Name="colorunit_id" Type="Int32" />
+          <Property Name="paper_width" Type="Double" />
+          <Property Name="paper_length" Type="Double" />
+          <Property Name="graeme_print" Type="Double" Nullable="false" />
+          <Property Name="paper_left" Type="Double" />
+          <Property Name="paper_right" Type="Double" />
+          <Property Name="paper_top" Type="Double" />
+          <Property Name="paper_under" Type="Double" />
+          <Property Name="autoduplex_gsm" Type="Double" />
+          <Property Name="printingspeed_color" Type="Double" />
+          <Property Name="printingspeed_blackwhite" Type="Double" />
+          <Property Name="colormeter_price" Type="Double" />
+          <Property Name="blackwhitemeter_price" Type="Double" />
+          <Property Name="setprintpang1" Type="Double" />
+          <Property Name="setprintpang2" Type="Double" />
+          <Property Name="printercostprict" Type="Double" />
+          <Property Name="installment" Type="Double" />
+          <Property Name="operator" Type="Double" />
+          <Property Name="workinghours" Type="Double" />
+          <Property Name="electricity" Type="Double" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="createrdate" Type="DateTime" Precision="6" />
+          <Property Name="username" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="roles" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Stock_Paper">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type_paper" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="gsm" Type="Int32" />
+          <Property Name="width" Type="Double" />
+          <Property Name="length" Type="Double" />
+          <Property Name="sheets_per_pack" Type="Double" />
+          <Property Name="price_per_pack" Type="Double" />
+          <Property Name="price_per_sheet" Type="Double" />
+        </EntityType>
+        <EntityType Name="Sys_Print">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="systemname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Type_Finishing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type_finishing" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="unit" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="PrinterStockEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ColorUnits" EntityType="Self.ColorUnit" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Finishings" EntityType="Self.Finishing" />
+          <EntitySet Name="Machine_Printer" EntityType="Self.Machine_Printer" />
+          <EntitySet Name="Owners" EntityType="Self.Owner" />
+          <EntitySet Name="Stock_Paper" EntityType="Self.Stock_Paper" />
+          <EntitySet Name="Sys_Print" EntityType="Self.Sys_Print" />
+          <EntitySet Name="Type_Finishing" EntityType="Self.Type_Finishing" />
+          <EntitySet Name="Units" EntityType="Self.Unit" />
+          <EntitySet Name="Job_Type" EntityType="PrinterStockModel.Job_Type" />
+          <EntitySet Name="Transfers" EntityType="PrinterStockModel.Transfer" />
+          <EntitySet Name="Provinces" EntityType="PrinterStockModel.Province" />
+          <EntitySet Name="DetailDataPrinters" EntityType="PrinterStockModel.DetailDataPrinter" />
+          <EntitySet Name="HeadDataPrinters" EntityType="PrinterStockModel.HeadDataPrinter" />
+          <AssociationSet Name="DetailDataPrinter_to_HeadDetailDataPrinter" Association="PrinterStockModel.DetailDataPrinter_to_HeadDetailDataPrinter">
+            <End Role="HeadDataPrinter" EntitySet="HeadDataPrinters" />
+            <End Role="DetailDataPrinter" EntitySet="DetailDataPrinters" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Job_Type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_job_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Transfer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_transfer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="province_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="province_name_eng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DetailDataPrinter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_headdataprinter" Type="Int32" Nullable="false" />
+          <Property Name="id_printer" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="id_paper" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="id_finishing" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="id_job_type" Type="Int32" />
+          <Property Name="id_transfer" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="lose" Type="Int32" />
+          <Property Name="color_print" Type="Int32" />
+          <Property Name="black_print" Type="Int32" />
+          <Property Name="width" Type="Double" />
+          <Property Name="height" Type="Double" />
+          <Property Name="vat" Type="Double" />
+          <Property Name="discount" Type="Double" />
+          <Property Name="paper_cost" Type="Double" />
+          <Property Name="printer_cost" Type="Double" />
+          <Property Name="finishing_cost" Type="Double" />
+          <Property Name="profit" Type="Double" />
+          <Property Name="recieve_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="HeadDataPrinter" Relationship="PrinterStockModel.DetailDataPrinter_to_HeadDetailDataPrinter" FromRole="DetailDataPrinter" ToRole="HeadDataPrinter" />
+        </EntityType>
+        <EntityType Name="HeadDataPrinter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_customer" Type="Int32" />
+          <Property Name="id_owner" Type="Int32" />
+          <Property Name="quantity" Type="Double" />
+          <Property Name="totalvat" Type="Double" />
+          <Property Name="totaldiscount" Type="Double" />
+          <Property Name="totalprice" Type="Double" />
+          <Property Name="grandtotalprice" Type="Double" />
+          <Property Name="changedbyid" Type="Int32" />
+          <Property Name="createdate" Type="DateTime" Precision="6" />
+          <Property Name="changedate" Type="DateTime" Precision="6" />
+          <NavigationProperty Name="DetailDataPrinters" Relationship="PrinterStockModel.DetailDataPrinter_to_HeadDetailDataPrinter" FromRole="HeadDataPrinter" ToRole="DetailDataPrinter" />
+        </EntityType>
+        <Association Name="DetailDataPrinter_to_HeadDetailDataPrinter">
+          <End Type="PrinterStockModel.HeadDataPrinter" Role="HeadDataPrinter" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PrinterStockModel.DetailDataPrinter" Role="DetailDataPrinter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HeadDataPrinter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DetailDataPrinter">
+              <PropertyRef Name="id_headdataprinter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PrinterStockModelStoreContainer" CdmEntityContainer="PrinterStockEntities">
+          <EntitySetMapping Name="ColorUnits">
+            <EntityTypeMapping TypeName="PrinterStockModel.ColorUnit">
+              <MappingFragment StoreEntitySet="ColorUnit">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="colorunit" ColumnName="colorunit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PrinterStockModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="postcode" ColumnName="postcode" />
+                <ScalarProperty Name="id_province" ColumnName="id_province" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Finishings">
+            <EntityTypeMapping TypeName="PrinterStockModel.Finishing">
+              <MappingFragment StoreEntitySet="Finishing">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="topic" ColumnName="topic" />
+                <ScalarProperty Name="detail" ColumnName="detail" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+                <ScalarProperty Name="quantity1" ColumnName="quantity1" />
+                <ScalarProperty Name="price1" ColumnName="price1" />
+                <ScalarProperty Name="quantity2" ColumnName="quantity2" />
+                <ScalarProperty Name="price2" ColumnName="price2" />
+                <ScalarProperty Name="quantity3" ColumnName="quantity3" />
+                <ScalarProperty Name="price3" ColumnName="price3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Machine_Printer">
+            <EntityTypeMapping TypeName="PrinterStockModel.Machine_Printer">
+              <MappingFragment StoreEntitySet="Machine_Printer">
+                <ScalarProperty Name="electricity" ColumnName="electricity" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_printer" ColumnName="name_printer" />
+                <ScalarProperty Name="system_id" ColumnName="system_id" />
+                <ScalarProperty Name="colorunit_id" ColumnName="colorunit_id" />
+                <ScalarProperty Name="paper_width" ColumnName="paper_width" />
+                <ScalarProperty Name="paper_length" ColumnName="paper_length" />
+                <ScalarProperty Name="graeme_print" ColumnName="graeme_print" />
+                <ScalarProperty Name="paper_left" ColumnName="paper_left" />
+                <ScalarProperty Name="paper_right" ColumnName="paper_right" />
+                <ScalarProperty Name="paper_top" ColumnName="paper_top" />
+                <ScalarProperty Name="paper_under" ColumnName="paper_under" />
+                <ScalarProperty Name="autoduplex_gsm" ColumnName="autoduplex_gsm" />
+                <ScalarProperty Name="printingspeed_color" ColumnName="printingspeed_color" />
+                <ScalarProperty Name="printingspeed_blackwhite" ColumnName="printingspeed_blackwhite" />
+                <ScalarProperty Name="colormeter_price" ColumnName="colormeter_price" />
+                <ScalarProperty Name="blackwhitemeter_price" ColumnName="blackwhitemeter_price" />
+                <ScalarProperty Name="setprintpang1" ColumnName="setprintpang1" />
+                <ScalarProperty Name="setprintpang2" ColumnName="setprintpang2" />
+                <ScalarProperty Name="printercostprict" ColumnName="printercostprict" />
+                <ScalarProperty Name="installment" ColumnName="installment" />
+                <ScalarProperty Name="operator" ColumnName="operator" />
+                <ScalarProperty Name="workinghours" ColumnName="workinghours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owners">
+            <EntityTypeMapping TypeName="PrinterStockModel.Owner">
+              <MappingFragment StoreEntitySet="Owner">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="createrdate" ColumnName="createrdate" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="roles" ColumnName="roles" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stock_Paper">
+            <EntityTypeMapping TypeName="PrinterStockModel.Stock_Paper">
+              <MappingFragment StoreEntitySet="Stock_Paper">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type_paper" ColumnName="type_paper" />
+                <ScalarProperty Name="gsm" ColumnName="gsm" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="length" ColumnName="length" />
+                <ScalarProperty Name="sheets_per_pack" ColumnName="sheets_per_pack" />
+                <ScalarProperty Name="price_per_pack" ColumnName="price_per_pack" />
+                <ScalarProperty Name="price_per_sheet" ColumnName="price_per_sheet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_Print">
+            <EntityTypeMapping TypeName="PrinterStockModel.Sys_Print">
+              <MappingFragment StoreEntitySet="Sys_Print">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="systemname" ColumnName="systemname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_Finishing">
+            <EntityTypeMapping TypeName="PrinterStockModel.Type_Finishing">
+              <MappingFragment StoreEntitySet="Type_Finishing">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type_finishing" ColumnName="type_finishing" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="PrinterStockModel.Unit">
+              <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Job_Type">
+            <EntityTypeMapping TypeName="PrinterStockModel.Job_Type">
+              <MappingFragment StoreEntitySet="Job_Type">
+                <ScalarProperty Name="name_job_type" ColumnName="name_job_type" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transfers">
+            <EntityTypeMapping TypeName="PrinterStockModel.Transfer">
+              <MappingFragment StoreEntitySet="Transfer">
+                <ScalarProperty Name="name_transfer" ColumnName="name_transfer" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provinces">
+            <EntityTypeMapping TypeName="PrinterStockModel.Province">
+              <MappingFragment StoreEntitySet="Province">
+                <ScalarProperty Name="province_name_eng" ColumnName="province_name_eng" />
+                <ScalarProperty Name="province_name" ColumnName="province_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailDataPrinters">
+            <EntityTypeMapping TypeName="PrinterStockModel.DetailDataPrinter">
+              <MappingFragment StoreEntitySet="DetailDataPrinter">
+                <ScalarProperty Name="recieve_date" ColumnName="recieve_date" />
+                <ScalarProperty Name="profit" ColumnName="profit" />
+                <ScalarProperty Name="finishing_cost" ColumnName="finishing_cost" />
+                <ScalarProperty Name="printer_cost" ColumnName="printer_cost" />
+                <ScalarProperty Name="paper_cost" ColumnName="paper_cost" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="vat" ColumnName="vat" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="black_print" ColumnName="black_print" />
+                <ScalarProperty Name="color_print" ColumnName="color_print" />
+                <ScalarProperty Name="lose" ColumnName="lose" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="id_transfer" ColumnName="id_transfer" />
+                <ScalarProperty Name="id_job_type" ColumnName="id_job_type" />
+                <ScalarProperty Name="id_finishing" ColumnName="id_finishing" />
+                <ScalarProperty Name="id_paper" ColumnName="id_paper" />
+                <ScalarProperty Name="id_printer" ColumnName="id_printer" />
+                <ScalarProperty Name="id_headdataprinter" ColumnName="id_headdataprinter" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HeadDataPrinters">
+            <EntityTypeMapping TypeName="PrinterStockModel.HeadDataPrinter">
+              <MappingFragment StoreEntitySet="HeadDataPrinter">
+                <ScalarProperty Name="changedate" ColumnName="changedate" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="changedbyid" ColumnName="changedbyid" />
+                <ScalarProperty Name="grandtotalprice" ColumnName="grandtotalprice" />
+                <ScalarProperty Name="totalprice" ColumnName="totalprice" />
+                <ScalarProperty Name="totaldiscount" ColumnName="totaldiscount" />
+                <ScalarProperty Name="totalvat" ColumnName="totalvat" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="id_owner" ColumnName="id_owner" />
+                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,77 @@
+﻿@model WebPrinter.Models.CreatePaperModel
+
+@using (Ajax.BeginForm("Register", "StockPaper", new AjaxOptions { HttpMethod = "POST", OnSuccess = "Paper.registerSuccess();" }, new { @class = "form-horizontal", @role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.id, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(m => m.id, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.id, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.type_paper, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.type_paper, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.type_paper, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.gsm, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.gsm, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.gsm, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.width, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.width, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.width, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.length, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.length, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.length, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.sheets_per_pack, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.sheets_per_pack, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.sheets_per_pack, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.price_per_pack, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.price_per_pack, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.price_per_pack, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.price_per_sheet, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.price_per_sheet, new { @class = "form-control" })
+                        <span class="help-block">@Html.ValidationMessageFor(m => m.price_per_sheet, null, new { @class = "help-inline", @style = "color:red" })</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-primary" >บันทึกข้อมูล</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+<script type="text/javascript" charset="utf-8">
+    $.validator.unobtrusive.parse($("form"));
+</script>

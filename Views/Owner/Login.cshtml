@@ -1,0 +1,39 @@
+﻿@model WebPrinter.Models.LogOnModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="container">
+    <div class="login-container">
+        <div id="output"></div>
+        <div class="avatar"></div>
+        <div class="form-box">
+            @using (Ajax.BeginForm("Login", new AjaxOptions { HttpMethod = "POST", OnSuccess = "Login(data);" }))
+            {
+                @Html.AntiForgeryToken()
+                <div id="display-error" class="help-inline" style="color:red;"></div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    @Html.TextBoxFor(m => m.username, new { @placeholder = "username", @class = "form-control" })
+                </div>
+                <small class="help-block">@Html.ValidationMessageFor(u => u.username, null, new { @class = "help-inline", @style = "color:red" })</small>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    @Html.PasswordFor(m => m.password, new { @placeholder = "password", @class = "form-control" })
+                </div>
+                <small class="help-block">@Html.ValidationMessageFor(u => u.password, null, new { @class = "help-inline", @style = "color:red" })</small>
+                <div>
+                    <label class="login-checkbox"><input type="checkbox"></label>
+                    <label class="login-remember">Remember me</label>
+                </div>
+                @Html.Hidden("ReturnUrl", Request.QueryString["ReturnUrl"])
+                <input class="btn btn-info" type="submit" value="Login">
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+

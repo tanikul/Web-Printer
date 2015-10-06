@@ -1,0 +1,354 @@
+﻿@{
+    ViewBag.Title = "SearchResult";
+}
+
+@Scripts.Render("~/bundles/bootstrap-select")
+@Styles.Render("~/Content/bootstrap-select")
+@Scripts.Render("~/bundles/bootstrap-datetimepicker")
+@Styles.Render("~/Content/bootstrap-datetimepicker")
+
+<div class="col-md-6">
+    <div class="row">
+        <div class="col-md-10">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">ชื่อลูกค้า</label>
+                    <div class="col-md-8">
+                        <select id="customer" class="selectpicker with-ajax form-control show-tick" data-live-search="true"></select>
+                    </div>
+                    <div class="col-md-1 col-right"><button type="button" class="btn btn-info bnt-margi-top" onclick="XHC.OpenHint('customer');"><i class="glyphicon glyphicon-zoom-in"></i></button></div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-7">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-4 control-label label-left">ลักษณะงานพิมพ์</label>
+                    <div class="col-md-6">
+                        @Html.DropDownList("job_type", null, new { @class = "selectpicker form-control show-tick", @data_live_search = true })
+                    </div>
+                    <div class="col-md-1 col-right"><button type="button" class="btn btn-info bnt-margi-top" onclick="XHC.OpenHint('job');"><i class="glyphicon glyphicon-zoom-in"></i></button></div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-5">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-5 control-label">จำนวน</label>
+                    <div class="col-md-5">
+                        @Html.TextBox("qty", 0, new { @class = "form-control", @onkeyup = "CheckNumber(this);" })
+                    </div>
+                    <div class="col-md-2 control-label">แผ่น</div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-7"></div>
+        <div class="col-md-5">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-5 control-label">เผื่อเสีย</label>
+                    <div class="col-md-5">
+                        @Html.TextBox("lose", 0, new { @class = "form-control", @onkeyup = "CheckNumber(this);" })
+                    </div>
+                    <div class="col-md-2 control-label">แผ่น</div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-10">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-3 control-label label-left">ประเภทกระดาษ</label>
+                    <div class="col-md-9" id="select-sum-size">
+                        @Html.DropDownList("paper", null, new { @class = "selectpicker form-control show-tick", @data_live_search = true, @onchange = "XHC.selectSize(this);" })
+                        @Html.Hidden("sum_size")
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-2 label-left">
+             <button type="button" class="btn btn-info bnt-margi-top" onclick="XHC.OpenHint('paper');"><i class="glyphicon glyphicon-zoom-in"></i></button>
+        </div>
+        @*<div class="col-md-9">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" style="text-align:right;">ขนาด</label>
+                    <label class="col-md-1 control-label">กว้าง</label>
+                    <div class="col-md-3">
+                        @Html.TextBox("width", null, new { @class = "form-control", @onkeyup = "CheckNumber(this);" })
+                    </div>
+                    <label class="col-md-1 control-label">ยาว</label>
+                    <div class="col-md-3">
+                        @Html.TextBox("height", null, new { @class = "form-control", @onkeyup = "CheckNumber(this);" })
+                    </div>
+                    <div class="col-md-1 control-label">mm.</div>
+                </div>
+            </form>
+        </div>*@
+        <div class="col-md-7">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-4 control-label label-left">ขนาด</label>
+                    <label class="col-md-3 control-label label-left">กว้าง</label>
+                    <div class="col-md-3">
+                        @Html.TextBox("width", 0, new { @class = "form-control", @onkeyup = "CheckNumber(this);" })
+                    </div>
+                    <div class="col-md-2 control-label">mm.</div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-5">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">ยาว</label>
+                    <div class="col-md-4">
+                        @Html.TextBox("height", 0, new { @class = "form-control", @onkeyup = "CheckNumber(this);" })
+                    </div>
+                    <div class="col-md-2 control-label">mm.</div>
+                </div>
+            </form>
+
+        </div>
+        @*<div class="col-md-9">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <label class="col-md-3 control-label">GSM</label>
+                    <div class="col-md-5">
+                        @Html.TextBox("gsm", null, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-1 control-label"></div>
+                </div>
+            </form>
+        </div>*@
+
+        <div class="col-md-7">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-4 control-label label-left">ลักษณะพิมพ์</label>
+                    <label class="col-md-3 control-label label-left">พิมพ์ 4 สี</label>
+                    <div class="col-md-3">
+                        @Html.TextBox("qty_color", 0, new { @class = "form-control", @onkeyup = "CheckNumber(this);" })
+                    </div>
+                    <div class="col-md-2 control-label">หน้า</div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-5">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">พิมพ์ขาวดำ</label>
+                    <div class="col-md-4">
+                       @Html.TextBox("qty_black", 0, new { @class = "form-control", @onkeyup = "CheckNumber(this);" })
+                    </div>
+                    <div class="col-md-2 control-label">หน้า</div>
+                </div>
+            </form>
+            
+        </div>
+
+        <div class="col-md-12">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-2 control-label"></label>
+                    <label class="col-md-2 control-label">เครื่องพิมพ์</label>
+                    <div class="col-md-7">
+                        @Html.DropDownList("printer", null, new { @class = "selectpicker form-control show-tick", @data_live_search = true })
+                    </div>
+                    <div class="col-md-1 col-right"><button type="button" class="btn btn-info bnt-margi-top" onclick="XHC.OpenHint('printer');"><i class="glyphicon glyphicon-zoom-in"></i></button></div>
+                    
+                </div>
+            </form>
+        </div>
+        <div id="finis_block">
+            <div class="col-md-10" id="finish_block_1">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">หลังงานพิมพ์</label>
+                        <label class="col-md-1 control-label">1</label>
+                        <div class="col-md-6">
+                            @Html.DropDownList("finishing", null, new { @class = "selectpicker form-control show-tick", @data_live_search = true, Id = "finishing_1", @onchange = "XHC.selectFinish(1, this);" })
+                        </div>
+                        <div class="col-md-2 control-label" id="finish_type_1">@ViewBag.unit_first</div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2">
+                <div class="col-md-1"><button type="button" class="btn btn-info bnt-margi-top" onclick="XHC.OpenHint('finish');"><i class="glyphicon glyphicon-zoom-in"></i></button></div>
+                <div class="col-md-1"><button type="button" class="btn btn-info bnt-margi-top" onclick="XHC.CreateFinishingElm();"><i class="glyphicon glyphicon-plus"></i></button></div>
+            </div>
+
+        </div>
+        <div class="col-md-7">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-4 control-label label-left">ช่องในการรับ</label>
+                    <div class="col-md-6">
+                        @Html.DropDownList("transfer", null, new { @class = "selectpicker form-control show-tick", @data_live_search = true })
+                    </div>
+                    <div class="col-md-2 label-left">
+                        <button type="button" class="btn btn-info bnt-margi-top" onclick="XHC.OpenHint('transfer');"><i class="glyphicon glyphicon-zoom-in"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-7">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-4 control-label label-left">วันที่รับงาน</label>
+                    <div class="col-md-8">
+                        <div class='input-group date' id='datetime'>
+                            <input type='text' class="form-control" id='recieve_date' />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-7">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-4 control-label label-left"></label>
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-primary" onclick="XHC.Calculate('normal');">Calculate</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="show-result"></div>
+<div id="search-result" style="display:none;">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12 line-center">
+                <div class="col-md-12"><h2>Summary</h2></div>
+                <div class="col-md-12">
+                    <div class="col-md-1"></div>
+                    <label class="col-md-11" style="text-align:left;">1. ต้นทุนในส่วนต่าง ๆ</label>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-2"></div>
+                    <label class="col-md-4">ต้นทุนกระดาษ</label>
+                    <label class="col-md-3">xxcost_paperxx</label>
+                    <label class="col-md-3">บาท</label>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-2"></div>
+                    <label class="col-md-4">ต้นทุนในการพิมพ์</label>
+                    <label class="col-md-3">xxcost_printerxx</label>
+                    <label class="col-md-3">บาท</label>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-2"></div>
+                    <label class="col-md-4">ต้นทุนงานหลังพิมพ์</label>
+                    <label class="col-md-3">xxcost_finishxx</label>
+                    <label class="col-md-3">บาท</label>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-2"></div>
+                    <label class="col-md-4">รวมทั้งหมด</label>
+                    <label class="col-md-3">xxtotalxx</label>
+                    <label class="col-md-3">บาท</label>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-1"></div>
+                    <label class="col-md-3" style="text-align:left;">2. ราคาขาย</label>
+                    <label class="col-md-2">
+                        <input type="text" style="width:65%;" value="xxprofitxx" id="input-sell" onkeyup="CheckNumber(this); XHC.CalculateSell(this);"><span style="float:right;"> %</span>
+                    </label>
+                    <label class="col-md-3" id="sell-price">xxsellxx</label>
+                    <label class="col-md-2">บาท</label>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-2"></div>
+                    <label class="col-md-4">ราคาต่อหน่วย</label>
+                    <label class="col-md-3" id="sell-price-unit">xxunitxx</label>
+                    <label class="col-md-3">บาท</label>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-1"></div>
+                    <label class="col-md-3" style="text-align:left;">3. ภาษีมูลค่าเพิ่ม</label>
+                    <label class="col-md-2">
+                        <input type="text" style="width:65%;" value="xxvat-inputxx" id="input-vat"  onkeyup="CheckNumber(this); XHC.CalculateVat(this);"><span style="float:right;"> %</span>
+                    </label>
+                    <label class="col-md-3" id="vat-price">xxvatxx</label>
+                    <label class="col-md-2">บาท</label>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-2"></div>
+                    <label class="col-md-4">ราคาต่อหน่วยและภาษีมูลค่าเพิ่ม</label>
+                    <label class="col-md-3" id="vat-price-unit">xxvat_unitxx</label>
+                    <label class="col-md-3">บาท</label>
+                </div>
+                <div class="col-md-12">
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-12">
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label label-left"></label>
+                            <div class="col-md-8">
+                                <button onclick="XHC.SaveCalculate();" class="btn btn-primary" type="button">บันทึกข้อมูล</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        XHC.paperValue = @Html.Raw(Json.Encode(ViewBag.IdandSize));
+        XHC.finishingItems = @Html.Raw(Json.Encode(ViewBag.finishing));
+        XHC.mapUnit = @Html.Raw(Json.Encode(ViewBag.mapUnit));
+        $('#datetime').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+        XHC.onload();
+    });
+
+    var options = {
+        ajax: {
+            url: '/Search/Customer',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                q: '{{{q}}}'
+            }
+        },
+        locale: {
+            emptyTitle: '-- เลือกรายชื่อลูกค้า --'
+        },
+        preprocessData: function (data) {
+            var i, l = data.length, array = [];
+            if (l) {
+                for(i = 0; i < l; i++){
+                    array.push($.extend(true, data[i], {
+                        text: data[i].name,
+                        value: data[i].id,
+                        data: {
+                            subtext: data[i].company
+                        }
+                    }));
+                }
+            }
+            // You must always return a valid array when processing data. The
+            // data argument passed is a clone and cannot be modified directly.
+            return array;
+        }
+    };
+    $('.selectpicker').selectpicker().filter('.with-ajax').ajaxSelectPicker(options);
+</script>

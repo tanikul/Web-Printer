@@ -1,0 +1,378 @@
+﻿@model WebPrinter.Models.MapModelDesc
+@if (ViewBag.type == "job") { 
+    <table id="example" class="table-bordered">
+        <thead>
+            <tr>
+                <th>ลำดับ</th>
+                <th>ลักษณะการพิมพ์</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+}
+else if (ViewBag.type == "paper")
+{
+    <table id="example" class="table-bordered" cellspacing="0">
+        <thead>
+            <tr>
+                <th></th>
+                <th>No.</th>
+                <th>Type Paper</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+}
+else if (ViewBag.type == "printer")
+{
+    <table id="example" class="table-bordered" cellspacing="0">
+        <thead>
+            <tr>
+                <th></th>
+                <th>No.</th>
+                <th>Name Printer</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+}
+else if (ViewBag.type == "transfer")
+{
+    <table id="example" class="table-bordered" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ลำดับ</th>
+                <th>ช่องในการรับ</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+}
+else if (ViewBag.type == "finish")
+{
+    <table id="example" class="table-bordered" cellspacing="0">
+        <thead>
+            <tr>
+                <th></th>
+                <th>ลำดับ</th>
+                <th>Topic</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+}
+else if (ViewBag.type == "customer")
+{
+    <table id="example" class="table-bordered" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ลำดับ</th>
+                <th>ชื่อ - นามสกุล</th>
+                <th>บริษัท</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+}
+
+@if (ViewBag.type == "job") {
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            table = $('#example').dataTable({
+                "processing": true,
+                "serverSide": true,
+                "responsive": true,
+                ajax: {
+                    url: "@ViewBag.url",
+                    type: 'POST',
+                },
+            });
+        });
+    </script>
+}
+else if (ViewBag.type == "printer")
+{
+    <script type="text/javascript" charset="utf-8">
+        function format(d) {
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                '<tr>' +
+                    '<td align="right">System :</td>' +
+                    '<td>' + d.systemname + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Color :</td>' +
+                    '<td>' + d.colorunit + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">พิมพ์แกรมสูงสุด :</td>' +
+                    '<td>' + d.graeme_print + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">ขนาดกระดาษสูงสุด (mm.) :</td>' +
+                    '<td>กว้าง : ' + d.paper_width + ' ยาว : ' + d.paper_length + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">ระยะขอบขาวของกระดาษ (mm.) :</td>' +
+                    '<td>ซ้าย : ' + d.paper_left + ' ขวา : ' + d.paper_right + ' บน : ' + d.paper_top + ' ล่าง : ' + d.paper_under + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Auto DuPlex (Gsm) :</td>' +
+                    '<td>' + d.autoduplex_gsm + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">ความเร็วรอบพิมพ์สี Page/min :</td>' +
+                    '<td>' + d.printingspeed_color + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">ความเร็วรอบพิมพ์ขาวดำ :</td>' +
+                    '<td>' + d.printingspeed_blackwhite + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Color meter (Bath) :</td>' +
+                    '<td>' + d.colormeter_price + '</td>' +
+                '</tr>' + '<tr>' +
+                    '<td align="right">BW meter (Bath) :</td>' +
+                    '<td>' + d.blackwhitemeter_price + '</td>' +
+                '</tr>' + '<tr>' +
+                    '<td align="right">เผื่อในการตั้งเครื่องหน้า 1 (Bath) :</td>' +
+                    '<td>' + d.setprintpang1 + '</td>' +
+                '</tr>' + '<tr>' +
+                    '<td align="right">เผื่อในการตั้งเครื่องหน้า 2 (Bath) :</td>' +
+                    '<td>' + d.setprintpang2 + '</td>' +
+                '</tr>' + '<tr>' +
+                    '<td align="right">ค่าเสื่อมราคาเครื่อง :</td>' +
+                    '<td>' + 'ราคาเครื่อง : ' + d.printercostprict + ' ระยะผ่อน (เดือน) : ' + d.installment + '</td>' +
+                '</tr>' + '<tr>' +
+                    '<td align="right">ค่าไฟฟ้า :</td>' +
+                    '<td>' + d.operator + '</td>' +
+                '</tr>' + '<tr>' +
+                    '<td align="right">ชั่วโมงในการทำงาน(ต่อเดือน) :</td>' +
+                    '<td>' + d.workinghours + '</td>' +
+                '</tr>' +
+            '</table>';
+        }
+
+        $(document).ready(function () {
+            table = $('#example').DataTable({
+                ajax: {
+                    url: "@ViewBag.url",
+                    type: 'POST',
+                },
+                "columns": [
+                    {
+                        "className": 'details-control',
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": ''
+                    },
+                    { "data": "id" },
+                    { "data": "name_printer" }
+                ],
+                "order": [[1, 'asc']]
+            });
+
+            // Add event listener for opening and closing details
+            $('#example tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
+            });
+        });
+    </script>
+}
+else if (ViewBag.type == "paper"){
+    <script type="text/javascript" charset="utf-8">
+        function format(d) {
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                '<tr>' +
+                    '<td align="right">GSM :</td>' +
+                    '<td>' + d.gsm + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Width :</td>' +
+                    '<td>' + d.width + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Length :</td>' +
+                    '<td>' + d.length + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Sheets/Pack :</td>' +
+                    '<td>' + d.sheets_per_pack + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Price/Pack :</td>' +
+                    '<td>' + d.price_per_pack + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Price/Sheet :</td>' +
+                    '<td>' + d.price_per_sheet + '</td>' +
+                '</tr>' +
+            '</table>';
+        }
+
+        $(document).ready(function () {
+            table = $('#example').DataTable({
+                ajax: {
+                    url: "@ViewBag.url",
+                    type: 'POST',
+                },
+                "columns": [
+                    {
+                        "className": 'details-control',
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": ''
+                    },
+                    { "data": "id" },
+                    { "data": "type_paper" }
+                ],
+                "order": [[1, 'asc']]
+            });
+
+            // Add event listener for opening and closing details
+            $('#example tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
+            });
+        });
+    </script>
+}
+else if (ViewBag.type == "transfer")
+{
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            table = $('#example').DataTable({
+                ajax: {
+                    url: "@ViewBag.url",
+                    type: 'POST',
+                },
+                "columns": [
+                    { "data": "id" },
+                    { "data": "name_transfer" },
+                ],
+                "order": [[1, 'asc']]
+            });
+        });
+    </script>
+}
+else if (ViewBag.type == "finish")
+{
+    <script type="text/javascript" charset="utf-8">
+        function format(d) {
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                '<tr>' +
+                    '<td align="right">Detail :</td>' +
+                    '<td>' + d.detail + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Type :</td>' +
+                    '<td>' + d.type_finishing + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Unit :</td>' +
+                    '<td>' + d.unit + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">จำนวน(1) :</td>' +
+                    '<td>' + d.quantity1 + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Piece :</td>' +
+                    '<td>' + d.price1 + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">จำนวน(2) :</td>' +
+                    '<td>' + d.quantity2 + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Piece :</td>' +
+                    '<td>' + d.price2 + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">จำนวน(3) :</td>' +
+                    '<td>' + d.quantity3 + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td align="right">Piece :</td>' +
+                    '<td>' + d.price3 + '</td>' +
+                '</tr>' +
+            '</table>';
+        }
+
+        $(document).ready(function () {
+            table = $('#example').DataTable({
+                ajax: {
+                    url: "@ViewBag.url",
+                    type: 'POST',
+                },
+                "columns": [
+                    {
+                        "className": 'details-control',
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": ''
+                    },
+                    { "data": "id" },
+                    { "data": "topic" }
+                ],
+                "order": [[1, 'asc']]
+            });
+
+            // Add event listener for opening and closing details
+            $('#example tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
+            });
+        });
+    </script>
+}
+else if (ViewBag.type == "customer")
+{
+    <script type="text/javascript" charset="utf-8">
+        $('#example').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "order": [[0, "asc"]],
+            ajax: {
+                url: "@ViewBag.url",
+                type: 'POST',
+            },
+            "fnInitComplete": function (oSettings, json) {
+            }
+        });
+    </script>
+}

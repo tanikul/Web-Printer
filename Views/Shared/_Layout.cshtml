@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/script")
+    @Styles.Render("~/Content/dataTable")
+    @Scripts.Render("~/bundles/dataTable")
+</head>
+<body> 
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: #76C7C1; min-height:65px;">
+    <a class="navbar-brand" href="#">Printer</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <ul class="nav pull-right">
+            <li class="nav-user dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="/images/user.png" class="nav-avatar" />
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    @*<li><a href="#">My Profile</a></li>
+                    <li><a href="#">Edit Profile</a></li>*@
+                    <li><a href="/ManageAccount">Manage Account</a></li>
+                    @*<li class="divider"></li>*@
+                    <li><a href="/Owner/Logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    }
+</nav>
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.Partial("~/Views/Shared/_TitleBar.cshtml");
+}
+<div class="wrapper">
+    <div class="container">
+        <div class="row">
+            @*<div class="span9">*@
+                <div class="content" id="content">
+                    @RenderBody()
+                @*</div>*@
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="footer">
+    <div class="container">
+        <b class="copyright">&copy; 2014 Edmin - EGrappler.com </b>All rights reserved.
+    </div>
+</div>*@
+<div id="loading" class="modal-loading"><img src="~/Content/img/ajax-loader.gif" /></div>
+<div class="modal fade" id="save-result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="form-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="save-success" style="display:none;">
+    <img src="~/Content/img/save_success.png" /><div class="save-txt"></div>
+</div>
+<div id="save-fail" style="display:none;">
+    <img src="~/Content/img/save_fail.png" /><div class="save-txt"></div>
+</div>
+<div id="save-warning" style="display:none;">
+    <img src="~/Content/img/save_warning.png" /><div class="save-txt"></div>
+</div>
+
+@RenderSection("scripts", required: false)
+</body>
+</html>

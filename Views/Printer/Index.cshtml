@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Manage Printer</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="add-data-bnt"><button type="button" class="btn btn-primary" id="add_data" onclick="Printer.Register();"><i class="glyphicon glyphicon-plus"></i>  เพิ่มข้อมูล</button></div>
+        </div>
+
+        <table id="example" class="table-bordered" cellspacing="0">
+            <thead>
+                <tr>
+                    <th rowspan="2"></th>
+                    <th rowspan="2">No.</th>
+                    <th rowspan="2">Name Printer</th>
+                    <th rowspan="2">System</th>
+                    <th rowspan="2">Color</th>
+                    <th rowspan="2">พิมพ์แกรมสูงสุด</th>
+                    <th colspan="2">ขนาดกระดาษสูงสุด (mm.)</th>
+                </tr>
+                <tr>
+                    <th>กว้าง</th>
+                    <th>ยาว</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    function format(d) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+            '<tr>' +
+                '<td>ระยะขอบขาวของกระดาษ (mm.) :</td>' +
+                '<td>ซ้าย : ' + d.paper_left + ' ขวา : ' + d.paper_right + ' บน : ' + d.paper_top + ' ล่าง : ' + d.paper_under + '</td>' +
+            '</tr>'+
+            '<tr>' +
+                '<td align="right">Auto DuPlex (Gsm) :</td>' +
+                '<td>' + d.autoduplex_gsm + '</td>' +
+            '</tr>'+
+            '<tr>' +
+                '<td align="right">ความเร็วรอบพิมพ์สี Page/min :</td>' +
+                '<td>' + d.printingspeed_color + '</td>' +
+            '</tr>'+
+            '<tr>' +
+                '<td align="right">ความเร็วรอบพิมพ์ขาวดำ :</td>' +
+                '<td>' + d.printingspeed_blackwhite + '</td>' +
+            '</tr>'+
+            '<tr>' +
+                '<td align="right">Color meter (Bath) :</td>' +
+                '<td>' + d.colormeter_price + '</td>' +
+            '</tr>' + '<tr>' +
+                '<td align="right">BW meter (Bath) :</td>' +
+                '<td>' + d.blackwhitemeter_price + '</td>' +
+            '</tr>' + '<tr>' +
+                '<td align="right">เผื่อในการตั้งเครื่องหน้า 1 (Bath) :</td>' +
+                '<td>' + d.setprintpang1 + '</td>' +
+            '</tr>' + '<tr>' +
+                '<td align="right">เผื่อในการตั้งเครื่องหน้า 2 (Bath) :</td>' +
+                '<td>' + d.setprintpang2 + '</td>' +
+            '</tr>' + '<tr>' +
+                '<td align="right">ค่าเสื่อมราคาเครื่อง :</td>' +
+                '<td>' + 'ราคาเครื่อง : ' + d.printercostprict + ' ระยะผ่อน (เดือน) : ' + d.installment + '</td>' +
+            '</tr>' + '<tr>' +
+                '<td align="right">ค่าไฟฟ้า :</td>' +
+                '<td>' + d.operator + '</td>' +
+            '</tr>' + '<tr>' +
+                '<td align="right">ชั่วโมงในการทำงาน(ต่อเดือน) :</td>' +
+                '<td>' + d.workinghours + '</td>' +
+            '</tr>' + '<tr>' +
+                '<td align="right">แก้ไข/ลบ </td>' +
+                '<td>' + d.edit + '</td>' +
+            '</tr>' +
+        '</table>';
+    }
+
+    $(document).ready(function () {
+        table = $('#example').DataTable({
+            "ajax": "/Printer/LoadPrinter",
+            "columns": [
+                {
+                    "className": 'details-control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+                { "data": "id" },
+                { "data": "name_printer" },
+                { "data": "systemname" },
+                { "data": "colorunit" },
+                { "data": "graeme_print" },
+                { "data": "paper_width" },
+                { "data": "paper_length" }
+            ],
+            "order": [[1, 'asc']]
+        });
+
+        // Add event listener for opening and closing details
+        $('#example tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr'); 
+            var row = table.row(tr); 
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+        });
+    });
+</script>
+
+

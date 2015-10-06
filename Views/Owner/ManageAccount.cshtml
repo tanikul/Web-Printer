@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "ManageAccount";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Manage Account</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="add-data-bnt"><button type="button" class="btn btn-primary" id="add_data" onclick="Owner.Register();"><i class="glyphicon glyphicon-plus"></i>  เพิ่มข้อมูล</button></div>
+        </div>
+
+        <table id="example" class="display" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>ชื่อ - นามสกุล</th>
+                    <th>Email</th>
+                    <th>สิทธิ์ในระบบ</th>
+                    <th>แก้ไข / ลบ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ลำดับ</td>
+                    <td>ชื่อ - นามสกุล</td>
+                    <td>Email</td>
+                    <td>สิทธิ์ในระบบ</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Styles.Render("~/Content/dataTable")
+@Scripts.Render("~/bundles/dataTable")
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        table = $('#example').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "order": [[ 0, "desc" ]],
+            ajax: {
+                url: '/Owner/LoadAccount',
+                type: 'POST',         
+            },
+            "fnInitComplete": function (oSettings, json) {
+             
+            }
+        }); 
+    });
+</script>

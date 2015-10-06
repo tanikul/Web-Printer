@@ -1,0 +1,87 @@
+﻿@model WebPrinter.Models.Customer
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Ajax.BeginForm("Register", "Customer", new AjaxOptions { HttpMethod = "POST", OnSuccess = "Customer.registerSuccess();" }, new { @class = "form-horizontal", @role = "form" }))
+{ 
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label class="col-sm-3 control-label">ชือ</label>
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.fname, new { @placeholder = "ชื่อ", @class = "form-control" })
+            <span class="help-block">@Html.ValidationMessageFor(u => u.fname, null, new { @class = "help-inline", @style = "color:red" })</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">นามสกุล</label>
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.lname, new { @placeholder = "นามสกุล", @class = "form-control" })
+            <span class="help-block">@Html.ValidationMessageFor(u => u.lname, null, new { @class = "help-inline", @style = "color:red" })</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">บริษัท</label>
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.company, new { @placeholder = "ชื่อบริษัท", @class = "form-control" })
+            <span class="help-block">@Html.ValidationMessageFor(u => u.company, null, new { @class = "help-inline", @style = "color:red" })</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">ที่อยู่</label>
+        <div class="col-sm-8">
+            @Html.TextAreaFor(m => m.address, new { @placeholder = "ที่อยู่", @class = "form-control" })
+            <span class="help-block">@Html.ValidationMessageFor(u => u.address, null, new { @class = "help-inline", @style = "color:red" })</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">จังหวัด</label>
+        <div class="col-sm-8">
+            @Html.DropDownListFor(m => m.id_province, Model.ProvinceItems, new { @class = "form-control" })
+            <span class="help-block">@Html.ValidationMessageFor(u => u.id_province, null, new { @class = "help-inline", @style = "color:red" })</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">รหัสไปรษณีย์</label>
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.postcode, new { @placeholder = "รหัสไปรษณีย์", @class = "form-control" })
+            <span class="help-block">@Html.ValidationMessageFor(u => u.postcode, null, new { @class = "help-inline", @style = "color:red" })</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">เบอร์โทรศัพท์</label>
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.phone, new { @placeholder = "เบอร์โทรศัพท์", @class = "form-control" })
+            <span class="help-block">@Html.ValidationMessageFor(u => u.phone, null, new { @class = "help-inline", @style = "color:red" })</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">เบอร์โทรศัพท์มือถือ</label>
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.mobile, new { @placeholder = "เบอร์โทรศัพท์มือถือ", @class = "form-control" })
+            <span class="help-block">@Html.ValidationMessageFor(u => u.mobile, null, new { @class = "help-inline", @style = "color:red" })</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">แฟกซ์</label>
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.fax, new { @placeholder = "แฟกซ์", @class = "form-control" })
+            <span class="help-block">@Html.ValidationMessageFor(u => u.fax, null, new { @class = "help-inline", @style = "color:red" })</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">อีเมล์</label>
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.email, new { @placeholder = "อีเมล์", @class = "form-control" })
+            <span class="help-block">@Html.ValidationMessageFor(u => u.email, null, new { @class = "help-inline", @style = "color:red" })</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">บันทึก</button>
+        </div>
+    </div>
+}
+<script type="text/javascript" charset="utf-8">
+    $.validator.unobtrusive.parse($("form"));
+</script>
